@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>釜山 6 天行程</title>
+<style>
+  :root{
+    --ink:#152a30; --muted:#5d7075; --line:#dde5e3;
+    --sea:#0e6e7c; --sea-soft:#e3f0f0; --sand:#c47f2b; --sand-soft:#f6e9d6;
+    --paper:#f3f6f5; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px 64px}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:20;background:rgba(243,246,245,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+  .top .wrap{padding-top:14px;padding-bottom:0}
+  .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .brand h1{font-size:22px;margin:0;letter-spacing:.5px}
+  .brand .sub{font-family:Georgia,"Times New Roman",serif;font-style:italic;color:var(--sea);font-size:14px}
+  .nav{display:flex;gap:7px;overflow-x:auto;padding:12px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto;text-decoration:none;font-size:13.5px;font-weight:600;color:var(--sea);
+    background:var(--sea-soft);border:1px solid #cfe4e3;border-radius:999px;padding:6px 12px;white-space:nowrap}
+  .nav a.alt{color:var(--sand);background:var(--sand-soft);border-color:#eddcc2}
+
+  /* meta */
+  .meta{margin:18px 0 6px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+  .meta div{display:flex;gap:8px;padding:3px 0}
+  .meta b{flex:0 0 52px;color:var(--muted);font-weight:600}
+  .hint{margin:10px 2px 0;font-size:13px;color:var(--muted)}
+  .hint .k{cursor:default}
+
+  /* day */
+  .day{margin:26px 0 0;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .dhead{padding:16px 18px 14px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbfdfc,#fff)}
+  .eyebrow{font-family:Georgia,serif;font-style:italic;color:var(--sea);font-size:14px;letter-spacing:.3px}
+  .dhead h2{margin:2px 0 4px;font-size:19px;letter-spacing:.3px}
+  .theme{margin:0;color:var(--muted);font-size:13.5px}
+
+  ul.tl{list-style:none;margin:0;padding:6px 0 10px}
+  ul.tl > li{display:flex;gap:12px;padding:10px 18px;border-top:1px solid #eef2f1}
+  ul.tl > li:first-child{border-top:none}
+  .t{flex:0 0 62px;font-weight:700;color:var(--sea);font-variant-numeric:tabular-nums;font-size:14.5px;padding-top:1px}
+  .ev{flex:1 1 auto}
+  .ev .sub{margin:4px 0 0;padding-left:2px}
+  .ev .sub li{color:#33474c;font-size:15px;margin:3px 0;list-style:none;position:relative;padding-left:14px}
+  .ev .sub li:before{content:"·";position:absolute;left:2px;color:var(--sea);font-weight:700}
+  .tag{display:inline-block;font-size:11px;font-weight:700;color:var(--sand);background:var(--sand-soft);
+    border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px;letter-spacing:.5px}
+  .note{margin:0;padding:12px 18px 16px;color:var(--muted);font-size:13.5px;background:#fafcfb;border-top:1px solid #eef2f1}
+
+  /* korean copy chip */
+  .k{color:var(--sea);font-weight:600;border-bottom:1px dotted #7fb3b6;cursor:pointer;white-space:nowrap;
+     -webkit-tap-highlight-color:transparent}
+  .k:active{background:var(--sea-soft)}
+
+  /* blocks */
+  h3.sec{margin:30px 2px 10px;font-size:16px;letter-spacing:.5px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 4px}
+  .box ul{margin:0;padding:6px 20px 8px 30px}
+  .box li{margin:7px 0;font-size:15px}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  th,td{text-align:left;padding:10px 12px;font-size:14.5px;border-top:1px solid #eef2f1;vertical-align:top}
+  th{background:#eef4f3;color:var(--muted);font-weight:600;border-top:none}
+  td:last-child{white-space:nowrap;color:var(--sea);font-weight:600}
+
+  /* toast */
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;font-size:14px;padding:9px 16px;border-radius:999px;opacity:0;
+    transition:.22s;pointer-events:none;z-index:50}
+  #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="brand"><h1>釜山 6 天</h1><span class="sub">9/6 – 9/11 · 虎航</span></div>
+    <nav class="nav">
+      <a href="#d1">D1 抵達</a>
+      <a href="#d2">D2 海雲台</a>
+      <a href="#d3">D3 西面</a>
+      <a href="#d4">D4 影島</a>
+      <a href="#d5">D5 松島</a>
+      <a href="#d6">D6 南浦</a>
+      <a class="alt" href="#tips">提醒</a>
+      <a class="alt" href="#list">清單</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="meta">
+    <div><b>住宿</b><span>9/6–9/8 西面（<span class="k">서면</span>）｜9/8–9/11 南浦洞（<span class="k">남포동</span>）</span></div>
+    <div><b>去程</b><span>IT606 抵達釜山約 19:55</span></div>
+    <div><b>回程</b><span>IT607 起飛約 21:05（當地時間）</span></div>
+  </div>
+  <p class="hint">💡 韓文（藍色底線）點一下即可複製，直接貼到 Naver 地圖搜尋。</p>
+
+  <!-- DAY 1 -->
+  <section class="day" id="d1">
+    <div class="dhead"><div class="eyebrow">Day 1 · 9/6 週日</div><h2>抵達 · 西面</h2><p class="theme">班機晚到，只夠進市區＋宵夜</p></div>
+    <ul class="tl">
+      <li><span class="t">19:55</span><div class="ev">IT606 落地 金海機場（<span class="k">김해공항</span>）</div></li>
+      <li><span class="t">~20:40</span><div class="ev">出關、領行李、換錢／買交通卡</div></li>
+      <li><span class="t">20:45</span><div class="ev">輕軌（<span class="k">김해경전철</span>）→ 沙上站（<span class="k">사상역</span>）轉 2 號線 → 西面（<span class="k">서면</span>），約 50–60 分；飯店 check-in、放行李</div></li>
+      <li><span class="t">22:00</span><div class="ev"><span class="tag">餐</span>宵夜 秀英／水營本家豬肉湯飯（<span class="k">수영본가돼지국밥</span>）<ul class="sub"><li>24hr，西面市場（<span class="k">서면시장</span>）旁、7 號出口</li></ul></div></li>
+      <li><span class="t">—</span><div class="ev">不排景點，早點休息</div></li>
+    </ul>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day" id="d2">
+    <div class="dhead"><div class="eyebrow">Day 2 · 9/7 週一</div><h2>廣安里 → 海雲台藍線公園 → 新世界</h2><p class="theme">由東往西收，晚上住西面</p></div>
+    <ul class="tl">
+      <li><span class="t">09:30</span><div class="ev"><span class="tag">餐</span>廣安里（<span class="k">광안리</span>）Working Holiday（<span class="k">워킹홀리데이</span>）早午餐<ul class="sub"><li>海景第一排，班尼迪克蛋</li></ul></div></li>
+      <li><span class="t">11:00</span><div class="ev">往東到 尾浦（<span class="k">미포</span>）</div></li>
+      <li><span class="t">12:00</span><div class="ev">海雲台藍線公園（<span class="k">블루라인파크</span>）· 搭海邊列車，約 2.5 小時
+        <ul class="sub">
+          <li>買 海邊列車全站自由乘車券（<span class="k">모든역 탑승권</span>），各站可上下車</li>
+          <li>尾浦（<span class="k">미포</span>）→ 青沙浦（<span class="k">청사포</span>）下車午餐：烤貝（<span class="k">조개구이</span>）或海景咖啡</li>
+          <li>再搭一段到 玻璃海景展望台（<span class="k">다릿돌전망대</span>）：走藍色透明天空步道</li>
+          <li>坐回 尾浦（<span class="k">미포</span>）；接 海雲台海水浴場（<span class="k">해운대해수욕장</span>）順走</li>
+        </ul>
+      </div></li>
+      <li><span class="t">15:00</span><div class="ev">尾浦步行 10–15 分 → 中洞站（<span class="k">중동역</span>）→ 2 號線（往 梁山／<span class="k">양산</span> 方向）約 4 站 → Centum City 站（<span class="k">센텀시티역</span>），出站直通新世界</div></li>
+      <li><span class="t">15:30</span><div class="ev">新世界百貨 Centum City 店（<span class="k">신세계 센텀시티</span>）逛街<ul class="sub"><li>週一開到 20:00；想泡湯可加 Spa Land（<span class="k">스파랜드</span>）</li></ul></div></li>
+      <li><span class="t">晚餐</span><div class="ev"><span class="tag">餐</span>回西面 烤肉男子（<span class="k">고기굽는남자</span>）</div></li>
+    </ul>
+    <p class="note">海邊列車多半現場也能買，週一人少更好排；想保險可上官網或 Trip.com 先訂。天空膠囊（<span class="k">스카이캡슐</span>）沒搶到不可惜——다릿돌本來就要靠海邊列車才到得了。</p>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day" id="d3">
+    <div class="dhead"><div class="eyebrow">Day 3 · 9/8 週二</div><h2>西面咖啡＋逛街 · 搬家南浦洞</h2><p class="theme">咖啡早餐開場，豬肉湯飯當午餐再搬家</p></div>
+    <ul class="tl">
+      <li><span class="t">~09:00</span><div class="ev"><span class="tag">餐</span>早餐 Your Type 전포（<span class="k">유어타입 전포</span>）<ul class="sub"><li>전포역 2 號出口，9:00 開；熱門會排隊，趁開門去</li></ul></div></li>
+      <li><span class="t">~10:00</span><div class="ev">退房、行李寄放飯店櫃檯</div></li>
+      <li><span class="t">上午</span><div class="ev">西面（<span class="k">서면</span>）逛街：樂天百貨（<span class="k">롯데백화점</span>）、地下街、藥妝<ul class="sub"><li>百貨約 10:30–11:00 才開門</li></ul></div></li>
+      <li><span class="t">歇腳</span><div class="ev"><span class="tag">咖啡</span>逛累時 Strut Coffee（<span class="k">스트럿커피</span>）<ul class="sub"><li>전포역 8 號出口，平日 8:30 開；世界百大咖啡館，手沖</li></ul></div></li>
+      <li><span class="t">13:00</span><div class="ev"><span class="tag">餐</span>午餐 安木豬肉湯飯 西面店（<span class="k">안목 서면점</span>）<ul class="sub"><li>米其林必比登，凡內谷站（<span class="k">범내골역</span>）；無午休</li></ul></div></li>
+      <li><span class="t">14:30</span><div class="ev">取行李 → 1 號線往南浦，經 釜山站（<span class="k">부산역</span>）、中央站（<span class="k">중앙역</span>）→ 南浦洞（<span class="k">남포동</span>）check-in</div></li>
+      <li><span class="t">15:30</span><div class="ev">（可選）SeS 自動通關登記（<span class="k">자동출입국심사</span>）：釜山港國際客運碼頭（<span class="k">부산항국제여객터미널</span>），帶護照約 15–20 分</div></li>
+      <li><span class="t">傍晚</span><div class="ev">光復路（<span class="k">광복로</span>）、BIFF 廣場（<span class="k">BIFF광장</span>）、南浦洞地下街</div></li>
+      <li><span class="t">晚餐</span><div class="ev">南浦洞一帶輕鬆吃</div></li>
+    </ul>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="day" id="d4">
+    <div class="dhead"><div class="eyebrow">Day 4 · 9/9 週三</div><h2>影島（<span class="k">영도</span>）</h2><p class="theme">海景＋咖啡一日</p></div>
+    <ul class="tl">
+      <li><span class="t">10:00</span><div class="ev">白淺灘文化村（<span class="k">흰여울문화마을</span>）＋ 足浴咖啡廳 ＋ 絕影海岸散步路（<span class="k">절영해안산책로</span>）</div></li>
+      <li><span class="t">12:30</span><div class="ev"><span class="tag">餐</span>午餐（흰여울一帶小店）</div></li>
+      <li><span class="t">14:00</span><div class="ev">Momos Coffee 影島店（<span class="k">모모스커피 영도</span>）· 倉庫型旗艦店</div></li>
+      <li><span class="t">15:30</span><div class="ev">P.ARK（<span class="k">피아크</span>）6 層樓海景複合咖啡 ＋ ARTE MUSEUM 影島（<span class="k">아르떼뮤지엄 영도</span>）沉浸式數位藝術</div></li>
+      <li><span class="t">晚餐</span><div class="ev"><span class="tag">餐</span>回南浦 瘋狂烤腸（<span class="k">미친막창</span>）· 札嘎其（<span class="k">자갈치</span>），烤막창</div></li>
+    </ul>
+    <p class="note">影島沒地鐵；南浦↔影島搭公車（17 號）或計程車，島內點對點建議計程車較省時。</p>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="day" id="d5">
+    <div class="dhead"><div class="eyebrow">Day 5 · 9/10 週四</div><h2>松島（<span class="k">송도</span>）＋ 南浦收尾</h2><p class="theme">纜車＋雲橋，下午回南浦逛街</p></div>
+    <ul class="tl">
+      <li><span class="t">10:00</span><div class="ev">松島（<span class="k">송도</span>）· 南浦公車／計程車約 15 分<ul class="sub"><li>海上纜車（<span class="k">해상케이블카</span>）＋ 龍宮雲橋（<span class="k">용궁구름다리</span>）＋ 天空步道（<span class="k">스카이워크</span>）＋ 海灘</li></ul></div></li>
+      <li><span class="t">13:00</span><div class="ev"><span class="tag">餐</span>午餐（松島海邊或回南浦）</div></li>
+      <li><span class="t">14:30</span><div class="ev">回南浦逛街：國際市場（<span class="k">국제시장</span>）、富平罐頭市場（<span class="k">부평깡통시장</span>）、札嘎其市場（<span class="k">자갈치시장</span>）、地下街、伴手禮</div></li>
+      <li><span class="t">傍晚</span><div class="ev">（可選）龍頭山公園（<span class="k">용두산공원</span>）／釜山塔（<span class="k">부산타워</span>）夜景</div></li>
+      <li><span class="t">晚餐</span><div class="ev">南浦（札嘎其海鮮或自由）</div></li>
+    </ul>
+  </section>
+
+  <!-- DAY 6 -->
+  <section class="day" id="d6">
+    <div class="dhead"><div class="eyebrow">Day 6 · 9/11 週五</div><h2>南浦洞 · 完整白天</h2><p class="theme">班機 21:05，玩到近 18:00</p></div>
+    <ul class="tl">
+      <li><span class="t">上午</span><div class="ev">光復路（<span class="k">광복로</span>）、國際市場（<span class="k">국제시장</span>）、富平罐頭市場（<span class="k">부평깡통시장</span>）、龍頭山公園（<span class="k">용두산공원</span>）／釜山塔（<span class="k">부산타워</span>）</div></li>
+      <li><span class="t">午餐</span><div class="ev"><span class="tag">餐</span>李在模披薩（<span class="k">이재모피자</span>）· 光復路；避尖峰或外帶</div></li>
+      <li><span class="t">下午</span><div class="ev">樂天超市 光復店（<span class="k">롯데마트 광복점</span>）伴手禮＋退稅、地下街最後採買</div></li>
+      <li><span class="t">—</span><div class="ev">（SeS 若還沒辦，找空檔到釜山站附近碼頭補辦）</div></li>
+      <li><span class="t">~16:30</span><div class="ev">早點吃晚餐，或留到機場吃</div></li>
+      <li><span class="t">~17:45</span><div class="ev">出發 → 金海機場（<span class="k">김해공항</span>），約 50–60 分</div></li>
+      <li><span class="t">~19:00</span><div class="ev">到機場，國際線建議起飛前 2 小時、辦 check-in／退稅</div></li>
+      <li><span class="t">21:05</span><div class="ev">IT607 起飛</div></li>
+    </ul>
+    <p class="note">行李可先寄放南浦飯店櫃檯，玩到下午再回來拿。</p>
+  </section>
+
+  <!-- TIPS -->
+  <h3 class="sec" id="tips">提醒清單</h3>
+  <div class="box">
+    <ul>
+      <li><b>藍線公園</b>：天空膠囊常售完；改買 海邊列車全站自由乘車券（<span class="k">모든역 탑승권</span>）即可，還能到 다릿돌</li>
+      <li><b>李在模披薩</b>：週日公休（已避開）；排隊久 → 外帶或 CatchTable 訂位</li>
+      <li><b>新世界 Centum City</b>：每月最後週一公休＝9/28，不受影響</li>
+      <li><b>安木（<span class="k">안목</span>）／Working Holiday（<span class="k">워킹홀리데이</span>）</b>：旺季建議先訂位</li>
+      <li><b>SeS（<span class="k">자동출입국심사</span>）</b>：綜合民願中心 6/29 已搬遷；用 釜山港國際客運碼頭 較保險，或先打 <b>1345</b>（有中文）確認。帶護照、通常免費</li>
+      <li><b>機場交通</b>：金海機場 ↔ 市區 輕軌轉地鐵，抓 50–60 分</li>
+    </ul>
+  </div>
+
+  <!-- LIST -->
+  <h3 class="sec" id="list">美食＆景點對照</h3>
+  <table>
+    <tr><th>項目</th><th>安排</th></tr>
+    <tr><td>秀英／水營本家豬肉湯飯（<span class="k">수영본가돼지국밥</span>）</td><td>D1 晚餐</td></tr>
+    <tr><td>烤肉男子（<span class="k">고기굽는남자</span>）</td><td>D2 晚餐</td></tr>
+    <tr><td>Working Holiday（<span class="k">워킹홀리데이</span>）</td><td>D2 早午餐</td></tr>
+    <tr><td>Your Type（<span class="k">유어타입</span>）</td><td>D3 早餐</td></tr>
+    <tr><td>Strut Coffee（<span class="k">스트럿커피</span>）</td><td>D3 咖啡</td></tr>
+    <tr><td>安木豬肉湯飯（<span class="k">안목</span>）</td><td>D3 午餐</td></tr>
+    <tr><td>白淺灘足浴咖啡（<span class="k">흰여울</span>）／Momos（<span class="k">모모스커피</span>）</td><td>D4 影島</td></tr>
+    <tr><td>瘋狂烤腸（<span class="k">미친막창</span>）</td><td>D4 晚餐</td></tr>
+    <tr><td>李在模披薩（<span class="k">이재모피자</span>）</td><td>D6 午餐</td></tr>
+    <tr><td>海雲台藍線公園（<span class="k">블루라인파크</span>）</td><td>D2</td></tr>
+    <tr><td>新世界 Centum City（<span class="k">신세계 센텀시티</span>）</td><td>D2</td></tr>
+    <tr><td>影島 P.ARK＋ARTE MUSEUM（<span class="k">피아크</span>）</td><td>D4</td></tr>
+    <tr><td>松島 纜車＋雲橋（<span class="k">송도</span>）</td><td>D5</td></tr>
+    <tr><td>南浦洞 光復路／國際市場／札嘎其（<span class="k">남포동</span>）</td><td>D5–6</td></tr>
+  </table>
+
+</div>
+
+<div id="toast">已複製</div>
+
+<script>
+  var toast=document.getElementById('toast'),tid;
+  function ping(txt){toast.textContent='已複製：'+txt;toast.classList.add('on');clearTimeout(tid);tid=setTimeout(function(){toast.classList.remove('on')},1400);}
+  function copyText(t){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){ping(t)},function(){fallback(t)});}
+    else{fallback(t);}
+  }
+  function fallback(t){
+    try{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ping(t);}
+    catch(e){ping(t);}
+  }
+  document.querySelectorAll('.k').forEach(function(el){
+    el.setAttribute('role','button');el.setAttribute('tabindex','0');
+    el.addEventListener('click',function(){copyText(el.textContent.trim());});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();copyText(el.textContent.trim());}});
+  });
+</script>
+</body>
+</html>
